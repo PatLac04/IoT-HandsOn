@@ -34,7 +34,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
     1. Click "Create". Feel free to click the "Pin to dashboard" check box. This will add the newly created ASA service to the main Azure portal dashboard. 
       
       <p align="center">
-         <img src="../../Labs/images/newASA4.jpg" width="30%" height="30%" /> 
+         <img src="../../Labs/images/asa-2.png" width="30%" height="30%" /> 
       </p>   
   
   - Wait for the job to be created. You will see a notification banner that will pop up in the top right corner of the Azure portal to indicate the status of the job. This banner will disappear automatically. If you wish to see all the past notifications, click the bell icon. 
@@ -81,7 +81,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
     - Event Compression Type: None
     - Click "Save" and wait for the input to be created. 
     <p align="center">
-       <img src="../../Labs/images/ASANewInput.jpg" width="30%" height="30%" />
+       <img src="../../Labs/images/asa-4.png" width="30%" height="30%" />
     </p>   
   
 - Next, add an Output for the Stream Analytics job.
@@ -89,29 +89,15 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
         
       <p align="center">
          <img src="../../Labs/images/addOutput.jpg" width="50%" height="50%" /> 
-      </p>   
+      </p>
   
-  1. Click "+ Add" in the blade to the right and select "PowerBI"
+  1. Click "+ Add" in the blade to the right and select "CosmosDB"
   1. Fill out the values in the "New Output" blade. 
-    - Enter in any free form text for the "Output alias". eg. "PowerBI"
-    - Click the "Authorize" button to make the connection to your PowerBI account. In the pop-up window that appears, enter in your PowerBI username and password.
+    - Enter in any free form text for the "Output alias". eg. "CosmosDBTelemetry"
  
     <p align="center">
-       <img src="/HOL/IOTHubPiHackathon/images/powerBIOutput.jpg" width="30%" height="30%" /> 
+       <img src="../../Labs/images/asa-5.png" width="30%" height="30%" /> 
     </p>      
-    
-    - A new window will open requiring credentials to authorize the connection to PowerBI. Enter your credentials and click "Sign in".
-    <p align="center">
-       <img src="/HOL/IOTHubPiHackathon/images/authorizePBI.jpg" width="50%" height="50%" /> 
-    </p>      
-    
-    - Once you enter in the correct credentials, the "Group Workspace" drop down field should populate. Choose the workspace that you want the ASA streaming data to be stored. eg. "My workspace"
-    - Enter a Dataset name.  A dataset is a collection of data tables.  eg. Raspberry Pi Dataset
-    - Enter a Table Name. eg. Raspberry Pi Data Table
-    - Click "Save"  
-    <p align="center">
-       <img src="/HOL/IOTHubPiHackathon/images/powerBIOutput2.jpg" width="30%" height="30%" /> 
-    </p>
 
     - Wait for the input and output to be created.  Check the Notifications in the portal for a successful connection test.  
     
@@ -123,7 +109,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
     SELECT
       *
     INTO
-      [PowerBI]
+      [CosmosDBTelemetry]
     FROM
       [IoTHub]
   ```
@@ -132,7 +118,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
     - If you wish to run a test on your newly generated query, you will need to upload some sample data that the ASA Query tool will use to run the query. To generate a sample file, you can either manually generate your own file or get a sampling of data from the IoT Hub input. Click the elipses (...) beside the IoTHub input and click "Sample data from input" to start collecting data. Click the "Upload sample data from file" option once you have created a sample file and then run the query test by clicking the "Test" button.
 
       <p align="center">
-         <img src="../../Labs/images/ASAQuery.jpg" width="50%" height="50%" />
+         <img src="../../Labs/images/asa-7.png" width="50%" height="50%" />
       </p>
        
 - Start the ASA Job
@@ -140,7 +126,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
   1. Click the "Start" button
    
       <p align="center">
-         <img src="../../Labs/images/startASA.jpg" width="50%" height="50%" /> 
+         <img src="../../Labs/images/asa-9.png" width="50%" height="50%" /> 
       </p>  
       
   1. For the "Job output start time", click "Now"
@@ -150,7 +136,11 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
          <img src="../../Labs/images/startASA2.jpg" width="50%" height="50%" /> 
       </p>  
 
+- Once the job is running, go to your CosmosDB database and click on Data Explorer to see the data added.
 
+    <p align="center">
+        <img src="../../Labs/images/asa-10.png" width="90%" height="90%" /> 
+    </p>  
 
 
 [Back to Main HOL Instructions](/README.md)
