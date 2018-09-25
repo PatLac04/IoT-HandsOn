@@ -11,7 +11,12 @@ These steps will be performed in the morning before the workshop starts. You wil
 4. Download Azure Storage Explorer from https://azure.microsoft.com/en-us/features/storage-explorer/);
 5. Download and install/compile Service Bus Explorer from (https://github.com/paolosalvatori/ServiceBusExplorer).
 
-[!INCLUDE [cloud-shell-try-it.md](https://github.com/MicrosoftDocs/azure-docs/blob/master/includes/cloud-shell-try-it.md)]
+## Open Azure Cloud Shell
+
+Azure Cloud Shell is a free, interactive shell that you can use to run the steps in this article. Common Azure tools are preinstalled and configured in Cloud Shell for you to use with your account. Just select the **Copy** button to copy the code, paste it in Cloud Shell, and then press Enter to run it. There are a few ways to open Cloud Shell:
+
+- Select the **Cloud Shell** button on the menu in the upper-right corner of the [Azure portal](https://portal.azure.com). ![Cloud Shell from the portal](./images/cloud-shell-1.png)
+- Open a new tab and navigate to https://shell.azure.com
 
 ### Set up your resources using Azure CLI
 
