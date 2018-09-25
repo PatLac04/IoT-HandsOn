@@ -2,30 +2,30 @@
 
 These steps will be performed in the morning before the workshop starts. You will need to walk through each of the following steps to make sure that you can complete all exercices.
 
-
 1. Open a new InPrivate/Incognito web browser session Make sure your are opening a new InPrivate/Incognito web browser session throughout this setup to avoid any conflict between your sessions/logins;
 
-2. Setup a proper Microsoft account:
-- Important note: For the purpose of the labs during this training you will use a free 200$ Azure credit with a dedicated Azure subscription. You may need to use a different Microsoft/LiveId account if yours is already attached to an Azure subscription. That’s why here we highly recommend you  use an email who is not attached to any Azure subscription. If you don’t have one, you could easily create one here: https://login.live.com/;
-3. Get a free Azure Subscription from (https://azure.microsoft.com/en-ca/free/)
-4. Download Azure Storage Explorer from https://azure.microsoft.com/en-us/features/storage-explorer/);
-5. Download and install/compile Service Bus Explorer from (https://github.com/paolosalvatori/ServiceBusExplorer).
+   If you don't already have an Azure subscription, follow the next steps:
+   - Setup a proper Microsoft account:
+     - Important note: For the purpose of the labs during this training you will use a free 200$ Azure credit with a dedicated Azure subscription. You may need to use a different Microsoft/LiveId account if yours is already attached to an Azure subscription. That’s why here we highly recommend you  use an email who is not attached to any Azure subscription. If you don’t have one, you could easily create one here: https://login.live.com/;
+   - Get a free Azure Subscription from (https://azure.microsoft.com/en-ca/free/)
+2. Download and install Azure Storage Explorer from https://azure.microsoft.com/en-us/features/storage-explorer/);
+3. Download and install/compile Service Bus Explorer from (https://github.com/paolosalvatori/ServiceBusExplorer).
+4. If you're not using Visual Studio 2017, download and install Visual Studio Code from (https://code.visualstudio.com/).
 
 ## Open Azure Cloud Shell
 
 Azure Cloud Shell is a free, interactive shell that you can use to run the steps in this article. Common Azure tools are preinstalled and configured in Cloud Shell for you to use with your account. Just select the **Copy** button to copy the code, paste it in Cloud Shell, and then press Enter to run it. There are a few ways to open Cloud Shell:
 
-- Select the **Cloud Shell** button on the menu in the upper-right corner of the [Azure portal](https://portal.azure.com). ![Cloud Shell from the portal](./images/cloud-shell-1.png)
+- Select the **Cloud Shell** button on the menu in the upper-right corner of the [Azure portal](https://portal.azure.com). ![Cloud Shell from the portal](/Labs/images/cloud-shell-1.png)
 - Open a new tab and navigate to https://shell.azure.com
 
 ### Set up your resources using Azure CLI
 
-Copy and paste this script into Cloud Shell. Assuming you are already logged in, it runs the script one line at a time. 
+Copy and paste this script into Cloud Shell. Assuming you are already logged in, it runs the script one line at a time.
 
 The variables that must be globally unique have `$RANDOM` concatenated to them. When the script is run and the variables are set, a random numeric string is generated and concatenated to the end of the fixed string, making it unique.
 
 ```azurecli-interactive
-
 # This is the IOT Extension for Azure CLI.
 # You only need to install this the first time.
 # You need it to create the device identity. 
@@ -113,6 +113,5 @@ az iot hub device-identity show --device-id $iotDeviceName \
     --hub-name $iotHubName
 
 ```
-
 
 [Back to Main HOL Instructions](/README.md)
