@@ -44,7 +44,7 @@ Follow the instruction to setup the environment [here](/Labs/Setup/README.md).
    - Register the device in IoTHub;
    - Send telemetry from the device.
 
-2) [**Lab 2**](/Labs/Lab-1/README.md): 
+2) [**Lab 2**](/Labs/Lab-2/README.md): 
    - Receive Cloud to Device (C2D) message;
    - Receive a  Direct Method
 

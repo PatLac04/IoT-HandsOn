@@ -21,6 +21,14 @@ Azure Cloud Shell is a free, interactive shell that you can use to run the steps
 
 ### Set up your resources using Azure CLI
 
+The script below will create the following resources:
+
+- IoTHub
+- IoT Simulated Device called **Contoso-Test-Device**
+- Azure Storage Account
+- Service Bus Namespace & Queue
+- CosmosDB Account & Database
+
 Copy and paste this script into Cloud Shell. Assuming you are already logged in, it runs the script one line at a time.
 
 The variables that must be globally unique have `$RANDOM` concatenated to them. When the script is run and the variables are set, a random numeric string is generated and concatenated to the end of the fixed string, making it unique.
@@ -39,7 +47,7 @@ location=canadaeast
 resourceGroup=IoTHandsOn
 iotHubConsumerGroup=ContosoConsumers
 containerName=contosoresults
-iotDeviceName=Contoso-Test-Device 
+iotDeviceName=Contoso-Test-Device
 
 # Create the resource group to be used
 #   for all the resources for this tutorial.
@@ -66,24 +74,24 @@ echo "Storage account name = " $storageAccountName
 # Create the storage account to be used as a routing destination.
 az storage account create --name $storageAccountName \
     --resource-group $resourceGroup \
-	--location $location \
+    --location $location \
     --sku Standard_LRS
 
-# Get the primary storage account key. 
+# Get the primary storage account key.
 #    You need this to create the container.
 storageAccountKey=$(az storage account keys list \
     --resource-group $resourceGroup \
     --account-name $storageAccountName \
-    --query "[0].value" | tr -d '"') 
+    --query "[0].value" | tr -d '"')
 
 # See the value of the storage account key.
 echo "$storageAccountKey"
 
-# Create the container in the storage account. 
+# Create the container in the storage account.
 az storage container create --name $containerName \
     --account-name $storageAccountName \
     --account-key $storageAccountKey \
-    --public-access off 
+    --public-access off
 
 # The Service Bus namespace must be globally unique, so add a random number to the end.
 sbNameSpace=ContosoSBNamespace$RANDOM
@@ -93,7 +101,7 @@ echo "Service Bus namespace = " $sbNameSpace
 az servicebus namespace create --resource-group $resourceGroup \
     --name $sbNameSpace \
     --location $location
-	
+
 # The Service Bus queue name must be globally unique, so add a random number to the end.
 sbQueueName=ContosoSBQueue$RANDOM
 echo "Service Bus queue name = " $sbQueueName
@@ -101,7 +109,7 @@ echo "Service Bus queue name = " $sbQueueName
 # Create the Service Bus queue to be used as a routing destination.
 az servicebus queue create --name $sbQueueName \
     --namespace-name $sbNameSpace \
-	--resource-group $resourceGroup
+    --resource-group $resourceGroup
 
 # Create the IoT device identity to be used for testing.
 az iot hub device-identity create --device-id $iotDeviceName \
@@ -112,6 +120,32 @@ az iot hub device-identity create --device-id $iotDeviceName \
 az iot hub device-identity show --device-id $iotDeviceName \
     --hub-name $iotHubName
 
+# CosmosDB Setup
+
+# Set variables for the new account, database, and collection
+cosmosAccountName=cosmosdb-$RANDOM
+echo "CosmosAccountName = " $cosmosAccountName
+cosmosDbName='Telemetry'
+cosmosDbCollectionName='IoTData'
+
+# Create a DocumentDB API Cosmos DB account
+az cosmosdb create \
+    --name $cosmosAccountName \
+    --kind GlobalDocumentDB \
+    --resource-group $resourceGroup \
+
+# Create a database
+az cosmosdb database create \
+    --name $cosmosAccountName \
+    --db-name $cosmosDbName \
+    --resource-group $resourceGroup
+
+# Create a collection
+az cosmosdb collection create \
+    --collection-name $cosmosDbCollectionName \
+    --name $cosmosAccountName \
+    --db-name $cosmosDbName \
+    --resource-group $resourceGroup
 ```
 
 [Back to Main HOL Instructions](/README.md)

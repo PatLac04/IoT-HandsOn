@@ -14,17 +14,25 @@ namespace SimulatedDevice
     {
         private static DeviceClient s_deviceClient;
         private readonly static string s_myDeviceId = "Contoso-Test-Device";
+
+        // Connection string for your Device
+        // Each Device has a different connection string
+        private readonly static string s_connectionString = "{Device Connection String}";
         private readonly static string s_iotHubUri = "{IoTHub Name}.azure-devices.net";
         // This is the primary key for the device. This is in the portal. 
         // Find your IoT hub in the portal > IoT devices > select your device > copy the key. 
-        private readonly static string s_deviceKey = "";
+        private readonly static string s_deviceKey = "{Enter Device Key}";
 
         private static int s_telemetryInterval = 1; // Seconds
 
         private static void Main(string[] args)
         {
             Console.WriteLine("Routing Tutorial: Simulated device\n");
+            // There are 2 ways to create a DeviceClient, using the DeviceId, Device Key
             s_deviceClient = DeviceClient.Create(s_iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(s_myDeviceId, s_deviceKey), TransportType.Mqtt);
+
+            // Or using the device Connection string
+            //s_deviceClient = DeviceClient.CreateFromConnectionString(s_connectionString);
 
             // Create a handler for the direct method call
             s_deviceClient.SetMethodHandlerAsync("SetTelemetryInterval", SetTelemetryInterval, null).Wait();
@@ -36,7 +44,7 @@ namespace SimulatedDevice
             };
             device2CloudMesages.Start();
 
-            //
+            // Handle the reception of Cloud to Device messages
             ReceiveC2dAsync();
 
             Console.WriteLine("Press the Enter key to stop.");
