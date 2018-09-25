@@ -33,18 +33,18 @@ It is expected that you will have a base understanding of the following:
 
 ### Environment Setup
 
-Follow the instruction to setup the environment [here](/Labs/Setup/Readme.md).
+Follow the instruction to setup the environment [here](/Labs/Setup/README.md).
 
 ## Hand-On Labs
 
-1) [**Lab 1**](/Labs/Lab-1/readme.md)
+1) [**Lab 1**](/Labs/Lab-1/README.md)
 
    In this lab, you will do the following:
    - Create a simulated device;
    - Register the device in IoTHub;
    - Send telemetry from the device.
 
-2) [**Lab 2**](/Labs/Lab-1/readme.md): 
+2) [**Lab 2**](/Labs/Lab-1/README.md): 
    - Receive Cloud to Device (C2D) message;
    - Receive a  Direct Method
 
