@@ -16,6 +16,7 @@ namespace back_end_application
         // Connection string for your IoT Hub
         // az iot hub show-connection-string --hub-name {your iot hub name}
         private readonly static string s_connectionString = "{ IoTHub Connection String }";
+        private readonly static string s_myDeviceId = "Contoso-Test-Device";
 
         // Invoke the direct method on the device, passing the payload
         private static async Task InvokeMethod()
@@ -24,7 +25,7 @@ namespace back_end_application
             methodInvocation.SetPayloadJson("10");
 
             // Invoke the direct method asynchronously and get the response from the simulated device.
-            var response = await s_serviceClient.InvokeDeviceMethodAsync("MyDotnetDevice", methodInvocation);
+            var response = await s_serviceClient.InvokeDeviceMethodAsync(s_myDeviceId, methodInvocation);
 
             Console.WriteLine("Response status: {0}, payload:", response.Status);
             Console.WriteLine(response.GetPayloadAsJson());
