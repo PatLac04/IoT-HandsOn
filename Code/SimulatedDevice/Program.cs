@@ -5,6 +5,7 @@ using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SimulatedDevice
@@ -16,7 +17,7 @@ namespace SimulatedDevice
         private readonly static string s_iotHubUri = "{IoTHub Name}.azure-devices.net";
         // This is the primary key for the device. This is in the portal. 
         // Find your IoT hub in the portal > IoT devices > select your device > copy the key. 
-        private readonly static string s_deviceKey = "{ Device Key }";
+        private readonly static string s_deviceKey = "";
 
         private static int s_telemetryInterval = 1; // Seconds
 
@@ -28,7 +29,15 @@ namespace SimulatedDevice
             // Create a handler for the direct method call
             s_deviceClient.SetMethodHandlerAsync("SetTelemetryInterval", SetTelemetryInterval, null).Wait();
 
-            SendDeviceToCloudMessagesAsync();
+            // Send telemetry in a background thread
+            var device2CloudMesages = new Thread(SendDeviceToCloudMessagesAsync)
+            {
+                IsBackground = true
+            };
+            device2CloudMesages.Start();
+
+            //
+            ReceiveC2dAsync();
 
             Console.WriteLine("Press the Enter key to stop.");
             Console.ReadLine();
@@ -102,12 +111,32 @@ namespace SimulatedDevice
 
                 //set the body of the message to the serialized value of the telemetry data
                 var message = new Message(Encoding.ASCII.GetBytes(telemetryDataString));
+
+                // Add a custom application property to the message.
+                // An IoT hub can filter on these properties without access to the message body.
                 message.Properties.Add("level", levelValue);
 
+                // Send the tlemetry message
                 await s_deviceClient.SendEventAsync(message);
                 Console.WriteLine("{0} > Sent message: {1}", DateTime.Now, telemetryDataString);
 
                 await Task.Delay(s_telemetryInterval * 1000);
+            }
+        }
+
+        private static async void ReceiveC2dAsync()
+        {
+            Console.WriteLine("\nReceiving cloud to device messages from service");
+            while (true)
+            {
+                Message receivedMessage = await s_deviceClient.ReceiveAsync();
+                if (receivedMessage == null) continue;
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Received message: {0}", Encoding.ASCII.GetString(receivedMessage.GetBytes()));
+                Console.ResetColor();
+
+                await s_deviceClient.CompleteAsync(receivedMessage);
             }
         }
     }
