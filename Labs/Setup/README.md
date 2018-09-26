@@ -24,7 +24,7 @@ Azure Cloud Shell is a free, interactive shell that you can use to run the steps
 The script below will create the following resources:
 
 - IoTHub
-- IoT Simulated Device called **Contoso-Test-Device**
+- IoT Simulated Device called **Contoso-Gateway**
 - Azure Storage Account
 - Service Bus Namespace & Queue
 - CosmosDB Account & Database
