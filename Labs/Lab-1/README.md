@@ -4,12 +4,12 @@ For this lab, get the code from: [IoT-HandsOn](https://github.com/PatLac04/IoT-H
 
 Read through the instructions at [Send telemetry from a device to an IoT hub and read the telemetry from the hub with a back-end application (C#)](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-dotnet).
 
-The instructions are for Visual Studio Code so if you're using Visual Studio 2017, the instructions are a bit different but you should manage.
+The instructions are for Visual Studio Code so if you're using Visual Studio 2017, the instructions are a bit different but you'll manage.
 
 **Notes:**
 
 - You already created your IoTHub when you ran the script in the setup. Navigate to the [Azure Portal](https://portal.azure.com), find your Resource Group and you should see your IoTHub.
-- You also already registered a device called **Contoso-Test-Device** in your IoTHub. When you're in the portal, click on your IoTHub and select IoT Devices in the resource blade as shown here:
+- You also already registered a device called **Contoso-Gateway** in your IoTHub. When you're in the portal, click on your IoTHub and select IoT Devices in the resource blade as shown here:
 
    ![Cloud Shell from the portal](/Labs/images/iotdevice.png)
 - You can get the Device connection string by either clicking on the device in the portal or by running the following command in the Cloud Shell

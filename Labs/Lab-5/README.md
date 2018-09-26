@@ -105,11 +105,12 @@ public static void Run(IReadOnlyList<Document> input, ILogger log)
 
         foreach (Document doc in input)
         {
-            var deviceId = doc.GetPropertyValue<string>("deviceId");
-            var temp = doc.GetPropertyValue<string>("temperature");
-            var humidity = doc.GetPropertyValue<string>("humidity");
+            var gatewayId = doc.GetPropertyValue<string>("GatewayId");
+            var deviceId = doc.GetPropertyValue<string>("DeviceId");
+            var temp = doc.GetPropertyValue<string>("Temperature");
+            var humidity = doc.GetPropertyValue<string>("Humidity");
 
-            var updateInfo = string.Format("Created/Updated Document: DeviceId: {0}, Temp: {1}, HumidityPercent: {2}%", deviceId, temp, humidity );
+            var updateInfo = string.Format("Created/Updated Document: GatewayId: {0}, DeviceId: {1}, Temp: {2}, HumidityPercent: {3}%", gatewayId, deviceId, temp, humidity );
 
             log.LogInformation(updateInfo);
         }

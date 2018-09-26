@@ -42,7 +42,9 @@ namespace back_end_application
             Console.WriteLine("\nCalling Method SetTelemetryInterval on device\n");
 
             var methodInvocation = new CloudToDeviceMethod("SetTelemetryInterval") { ResponseTimeout = TimeSpan.FromSeconds(30) };
-            methodInvocation.SetPayloadJson("10");
+
+            // We're setting the interval to a number of seconds
+            methodInvocation.SetPayloadJson("30");
 
             // Invoke the direct method asynchronously and get the response from the simulated device.
             var response = await s_serviceClient.InvokeDeviceMethodAsync(s_myDeviceId, methodInvocation);

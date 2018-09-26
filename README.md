@@ -1,15 +1,16 @@
 # IoT Hub Hands on Lab (HoL)
 
 ## Overview
+
 This Hands on Lab (HOL) demonstrates the basic capabilities of [Azure IoT Hub](https://azure.microsoft.com/en-us/services/iot-hub/) and is targetted at developers.
-- Create simulated device 
+
+- Create simulated device
 - Register device in IoTHub
 - Send Telemetry (Device to Cloud)
 - Receive Message (Cloud to Device)
-- Play with IoTHub Routing
+- IoTHub Routing
 - Use Azure Stream Analytics to read from IoTHub
 - Create Azure Function triggered by CosmosDB ChangeFeed.
-
 
 ## Lab Requirements
 
@@ -22,7 +23,7 @@ It is expected that you will have a base understanding of the following:
 - Microsoft Azure (we will discuss the IoT specific aspects of Azure so are expecting attendees to understand Azure and the capabilities in a broader sense);
 - Development experience in C#.
 
-## Azure services and related products used in the labs
+## Azure services used in the labs
 - Azure IoT Hub
 - Service Bus
 - Azure Storage
@@ -31,7 +32,7 @@ It is expected that you will have a base understanding of the following:
 - Azure Functions
 - CosmosDB
 
-### Environment Setup
+## Environment Setup
 
 Follow the instruction to setup the environment [here](/Labs/Setup/README.md).
 
@@ -44,7 +45,19 @@ Follow the instruction to setup the environment [here](/Labs/Setup/README.md).
    - Register the device in IoTHub;
    - Send telemetry from the device.
 
-2) [**Lab 2**](/Labs/Lab-2/README.md): 
+2) [**Lab 2**](/Labs/Lab-2/README.md):
    - Receive Cloud to Device (C2D) message;
    - Receive a  Direct Method
 
+3) [**Lab 3**](/Labs/Lab-3/README.md):
+   - IoTHub Routing
+
+4) [**Lab 4**](/Labs/Lab-4/README.md):
+   - Azure Stream Analytics
+   - CosmosDB
+
+5) [**Lab 5**](/Labs/Lab-5/README.md):
+   - CosmosDB ChangeFeed
+
+6) [**Lab 6**](/Labs/Lab-6/README.md):
+   - SignalR Integration

@@ -47,7 +47,7 @@ location=canadaeast
 resourceGroup=IoTHandsOn
 iotHubConsumerGroup=ContosoConsumers
 containerName=contosoresults
-iotDeviceName=Contoso-Test-Device
+iotDeviceName=Contoso-Gateway
 
 # Create the resource group to be used
 #   for all the resources for this tutorial.

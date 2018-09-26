@@ -13,7 +13,7 @@ namespace SimulatedDevice
     class Program
     {
         private static DeviceClient s_deviceClient;
-        private readonly static string s_myDeviceId = "Contoso-Test-Device";
+        private readonly static string s_myDeviceId = "Contoso-Gateway";
 
         // Connection string for your Device
         // Each Device has a different connection string
@@ -23,11 +23,12 @@ namespace SimulatedDevice
         // Find your IoT hub in the portal > IoT devices > select your device > copy the key. 
         private readonly static string s_deviceKey = "{Enter Device Key}";
 
-        private static int s_telemetryInterval = 1; // Seconds
+        private static int s_telemetryInterval = 10; // Seconds
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("Routing Tutorial: Simulated device\n");
+            Console.WriteLine("IoTHub Hands-On: Simulated device\n");
+
             // There are 2 ways to create a DeviceClient, using the DeviceId and Device Key
             s_deviceClient = DeviceClient.Create(s_iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(s_myDeviceId, s_deviceKey), TransportType.Mqtt);
             // Or using the device Connection string
@@ -56,54 +57,54 @@ namespace SimulatedDevice
 
             while (true)
             {
-                double currentTemperature = minTemperature + rand.NextDouble() * 15;
-                double currentHumidity = minHumidity + rand.NextDouble() * 20;
-
-                string infoString;
-                string levelValue;
-
-                if (rand.NextDouble() > 0.5)
+                // We're simulating a Gateway sending telemetry for all it's devices
+                foreach (DeviceBase telemetry in StaticStuff.DeviceTelemetry)
                 {
-                    if (rand.NextDouble() > 0.8)
+                    double currentTemperature = minTemperature + rand.NextDouble() * 15;
+                    double currentHumidity = minHumidity + rand.NextDouble() * 20;
+
+                    string infoString;
+                    string levelValue;
+
+                    if (rand.NextDouble() > 0.5)
                     {
-                        levelValue = "critical";
-                        infoString = "This is a critical message.";
+                        if (rand.NextDouble() > 0.8)
+                        {
+                            levelValue = "critical";
+                            infoString = "This is a critical message.";
+                        }
+                        else
+                        {
+                            levelValue = "storage";
+                            infoString = "This is a storage message.";
+                        }
                     }
                     else
                     {
-                        levelValue = "storage";
-                        infoString = "This is a storage message.";
+                        levelValue = "normal";
+                        infoString = "This is a normal telemetry message.";
                     }
+
+                    telemetry.GatewayId = s_myDeviceId;
+                    telemetry.Temperature = currentTemperature;
+                    telemetry.Humidity = currentHumidity;
+                    telemetry.PointInfo = infoString;
+
+                    var telemetryDataString = JsonConvert.SerializeObject(telemetry);
+
+                    // Set the body of the message to the serialized value of the telemetry data
+                    var message = new Message(Encoding.ASCII.GetBytes(telemetryDataString));
+
+                    // Add a custom application property to the message.
+                    // An IoT hub can filter on these properties without access to the message body.
+                    message.Properties.Add("level", levelValue);
+
+                    // Send the tlemetry message
+                    await s_deviceClient.SendEventAsync(message);
+                    Console.WriteLine("{0} > Sent message: {1}", DateTime.Now, telemetryDataString);
                 }
-                else
-                {
-                    levelValue = "normal";
-                    infoString = "This is a normal telemetry message (once every 10 minutes).";
-                }
-
-                var telemetryDataPoint = new
-                {
-                    deviceId = s_myDeviceId,
-                    temperature = currentTemperature,
-                    humidity = currentHumidity,
-                    pointInfo = infoString
-                };
-                var telemetryDataString = JsonConvert.SerializeObject(telemetryDataPoint);
-
-                //set the body of the message to the serialized value of the telemetry data
-                var message = new Message(Encoding.ASCII.GetBytes(telemetryDataString));
-
-                // Add a custom application property to the message.
-                // An IoT hub can filter on these properties without access to the message body.
-                message.Properties.Add("level", levelValue);
-
-                // Send the tlemetry message
-                await s_deviceClient.SendEventAsync(message);
-                Console.WriteLine("{0} > Sent message: {1}", DateTime.Now, telemetryDataString);
-
                 await Task.Delay(s_telemetryInterval * 1000);
             }
-
         }
 
         // Handle the direct method call
@@ -129,6 +130,5 @@ namespace SimulatedDevice
                 return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 400));
             }
         }
-
     }
 }

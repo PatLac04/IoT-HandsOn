@@ -94,11 +94,12 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
   1. Click "+ Add" in the blade to the right and select "CosmosDB"
   1. Fill out the values in the "New Output" blade. 
     - Enter in any free form text for the "Output alias". eg. "CosmosDBTelemetry"
- 
-    <p align="center">
-       <img src="../../Labs/images/asa-5.png" width="30%" height="30%" /> 
-    </p>      
 
+    <p align="center">
+       <img src="../../Labs/images/asa-5.png" width="50%" height="30%" /> 
+    </p>
+
+    - Make sure the value for "Document id is **DeviceId**
     - Wait for the input and output to be created.  Check the Notifications in the portal for a successful connection test.  
     
 - Create an ASA Query.
@@ -114,7 +115,7 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
       [IoTHub]
   ```
 
-    - Click "Save". 
+    - Click "Save".
     - If you wish to run a test on your newly generated query, you will need to upload some sample data that the ASA Query tool will use to run the query. To generate a sample file, you can either manually generate your own file or get a sampling of data from the IoT Hub input. Click the elipses (...) beside the IoTHub input and click "Sample data from input" to start collecting data. Click the "Upload sample data from file" option once you have created a sample file and then run the query test by clicking the "Test" button.
 
       <p align="center">
