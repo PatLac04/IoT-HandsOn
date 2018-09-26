@@ -12,6 +12,10 @@ This Hands on Lab (HOL) demonstrates the basic capabilities of [Azure IoT Hub](h
 - Use Azure Stream Analytics to read from IoTHub
 - Create Azure Function triggered by CosmosDB ChangeFeed.
 
+This diagram shows what will be accomplished during the labs.
+
+![Architecture Diagram](/Labs/images/diagram.png)
+
 ## Lab Requirements
 
 1. Microsoft Azure subscription (pay-as-you-go or MSDN). (https://azure.microsoft.com/en-ca/free/);
@@ -20,10 +24,12 @@ This Hands on Lab (HOL) demonstrates the basic capabilities of [Azure IoT Hub](h
 4. Service Bus Explorer (https://github.com/paolosalvatori/ServiceBusExplorer).
 
 It is expected that you will have a base understanding of the following:
+
 - Microsoft Azure (we will discuss the IoT specific aspects of Azure so are expecting attendees to understand Azure and the capabilities in a broader sense);
 - Development experience in C#.
 
 ## Azure services used in the labs
+
 - Azure IoT Hub
 - Service Bus
 - Azure Storage
