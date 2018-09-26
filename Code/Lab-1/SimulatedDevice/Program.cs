@@ -103,10 +103,10 @@ namespace SimulatedDevice
 
                 await Task.Delay(s_telemetryInterval * 1000);
             }
-            
+
         }
 
-                // Handle the direct method call
+        // Handle the direct method call
         private static Task<MethodResponse> SetTelemetryInterval(MethodRequest methodRequest, object userContext)
         {
             var data = Encoding.UTF8.GetString(methodRequest.Data);

@@ -105,17 +105,19 @@ public static void Run(IReadOnlyList<Document> input, ILogger log)
 
         foreach (Document doc in input)
         {
-            log.LogInformation("Modfied Document Id " + doc.Id);
+            var deviceId = doc.GetPropertyValue<string>("deviceId");
+            var temp = doc.GetPropertyValue<string>("temperature");
+            var humidity = doc.GetPropertyValue<string>("humidity");
+
+            var updateInfo = string.Format("Created/Updated Document: DeviceId: {0}, Temp: {1}, HumidityPercent: {2}%", deviceId, temp, humidity );
+
+            log.LogInformation(updateInfo);
         }
     }
 }
 ```
 
   - Click “Save”
-
-   <p align="center">
-    <img src="/HOL/IOTHubPiHackathon/images/runFunction.jpg" />
-    </p>
 
 ### Run the Simulated Device application
 
