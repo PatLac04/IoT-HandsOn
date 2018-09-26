@@ -1,4 +1,4 @@
-## Lab 4
+# Lab 4
 
 In this lab, we are going to create an Azure Stream Analytics job that will take the telemetry data from the Simulated Device and send it to CosmosDB as the output. The Stream Analytics job will filter the messages where the field `level=normal`.
 
@@ -142,5 +142,9 @@ In this lab, we are going to create an Azure Stream Analytics job that will take
         <img src="../../Labs/images/asa-10.png" width="90%" height="90%" /> 
     </p>  
 
+## More Resources
+
+- [Get started with Azure Stream Analytics to process data from IoT devices](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-get-started-with-azure-stream-analytics-to-process-data-from-iot-devices#create-an-azure-stream-analytics-query)
+- [Query examples for common Stream Analytics usage patterns](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-stream-analytics-query-patterns)
 
 [Back to Main HOL Instructions](/README.md)

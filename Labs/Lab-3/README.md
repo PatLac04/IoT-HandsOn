@@ -1,4 +1,4 @@
-## Lab 3
+# Lab 3
 
 In this lab, you will configure Routing in the IoTHub. Routing allows you to route messages to specified endpoints based on the values of fields in the messages.
 

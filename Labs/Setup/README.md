@@ -1,4 +1,4 @@
-## Hands on Lab - Environment Setup
+# Hands on Lab - Environment Setup
 
 These steps will be performed in the morning before the workshop starts. You will need to walk through each of the following steps to make sure that you can complete all exercices.
 
