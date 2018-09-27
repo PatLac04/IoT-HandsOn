@@ -23,16 +23,16 @@ namespace SimulatedDevice
         // Find your IoT hub in the portal > IoT devices > select your device > copy the key. 
         private readonly static string s_deviceKey = "{Enter Device Key}";
 
-        private static int s_telemetryInterval = 10; // Seconds
+        private static int s_telemetryInterval = 20; // Seconds
 
         private static void Main(string[] args)
         {
             Console.WriteLine("IoTHub Hands-On: Simulated device\n");
 
             // There are 2 ways to create a DeviceClient, using the DeviceId and Device Key
-            s_deviceClient = DeviceClient.Create(s_iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(s_myDeviceId, s_deviceKey), TransportType.Mqtt);
+            //s_deviceClient = DeviceClient.Create(s_iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(s_myDeviceId, s_deviceKey), TransportType.Mqtt);
             // Or using the device Connection string
-            //s_deviceClient = DeviceClient.CreateFromConnectionString(s_connectionString);
+            s_deviceClient = DeviceClient.CreateFromConnectionString(s_connectionString);
 
             // Create a handler for the direct method call
             s_deviceClient.SetMethodHandlerAsync("SetTelemetryInterval", SetTelemetryInterval, null).Wait();

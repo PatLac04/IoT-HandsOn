@@ -19,7 +19,7 @@ namespace back_end_application
         // Connection string for your IoT Hub
         // az iot hub show-connection-string --hub-name {your iot hub name}
         private readonly static string s_connectionString = "{IoTHub Connection String}";
-        private readonly static string s_myDeviceId = "Contoso-Test-Device";
+        private readonly static string s_myDeviceId = "Contoso-Gateway";
 
         private static void Main(string[] args)
         {
@@ -44,7 +44,7 @@ namespace back_end_application
             var methodInvocation = new CloudToDeviceMethod("SetTelemetryInterval") { ResponseTimeout = TimeSpan.FromSeconds(30) };
 
             // We're setting the interval to a number of seconds
-            methodInvocation.SetPayloadJson("30");
+            methodInvocation.SetPayloadJson("45");
 
             // Invoke the direct method asynchronously and get the response from the simulated device.
             var response = await s_serviceClient.InvokeDeviceMethodAsync(s_myDeviceId, methodInvocation);
